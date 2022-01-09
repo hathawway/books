@@ -1,0 +1,25 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutAccount.cshtml"; }
+@{ ViewData["Title"] = "Аккаунт"; }
+
+@model AccountViewModel
+
+
+    <form class="account__section" asp-controller="User" asp-action="UpdateProfile" method="post">
+        <div class="account__section">
+            <div class="account__inner">Личная информация</div>
+
+            <div class="account__container" style="justify-content:center;">
+                <div class="containerAcc">
+                    <input asp-for="LastName" type="text" class="inputAcc" name="LastName"
+                           value="@(((ViewData["userInfo"]) as AccountViewModel).LastName)">
+                    <input asp-for="FirstName" type="text" class="inputAcc" name="FirstName"
+                           value="@(((ViewData["userInfo"]) as AccountViewModel).FirstName)">
+                    <input asp-for="MiddleName" type="text" class="inputAcc" name="MiddleName"
+                           value="@(((ViewData["userInfo"]) as AccountViewModel).MiddleName)">
+                    <input asp-for="AditionalInfo" type="text" class="inputAcc" name="AditionalInfo"
+                           value="@(((ViewData["userInfo"]) as AccountViewModel).AditionalInfo)">
+                </div>
+            </div>
+        </div>
+        <button class="btn__input-cart" type="submit" style="margin-bottom:10px; margin-top:20px; width: 250px; margin-left:650px;">Сохранить</button>
+    </form>

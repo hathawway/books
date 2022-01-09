@@ -1,0 +1,106 @@
+﻿@model NewPublication
+
+@{ Layout = "~/Views/Shared/_LayoutAccount.cshtml"; }
+
+<!---вьюха для добавление собственного ресурса
+-->
+<form class="account__section" asp-action="AddResource" method="post">
+    <div class="account__inner">Добавление нового ресурса</div>
+    <div class="btn__input-cart" type="button" style="margin-bottom:10px; margin-top:0px; width: 250px; margin-left:120px;"><a style="color:#fff; text-decoration:none" asp-controller="Account" asp-action="MyPosted">Назад</a></div>
+
+    <div class="account__container" style="justify-content:center;">
+        <div class="containerAcc">
+
+            <label asp-for="Name">
+                <div class="input__logo">Название</div>
+            </label>
+            <input asp-for="Name" class="input__login" type="text" title="Name">
+            <div class="span__input__login"><span asp-validation-for="Name"></span></div>
+
+            <label asp-for="Author">
+                <div class="input__logo">Автор</div>
+            </label>
+            <input asp-for="Author" class="input__login" type="text" title="Author">
+            <div class="span__input__login"><span asp-validation-for="Author"></span></div>
+
+            <label asp-for="OtherAuthors">
+                <div class="input__logo">Соавторы</div>
+            </label>
+            <input asp-for="OtherAuthors" class="input__login" type="text" title="OtherAuthors">
+            <div class="span__input__login"><span asp-validation-for="OtherAuthors"></span></div>
+
+            <label asp-for="PublishingYear">
+                <div class="input__logo">Год публикации</div>
+            </label>
+            <input asp-for="PublishingYear" class="input__login" type="number" min="1900" max="2099" step="1" value=sysdate title="PublishingYear">
+            <div class="span__input__login"><span asp-validation-for="PublishingYear"></span></div>
+
+            <label asp-for="PublishedBy">
+                <div class="input__logo">Издательство</div>
+            </label>
+            <input asp-for="PublishedBy" class="input__login" type="text" title="PublishedBy">
+            <div class="span__input__login"><span asp-validation-for="PublishedBy"></span></div>
+
+            <label asp-for="Thematics">
+                <div class="input__logo">Тематика</div>
+            </label>
+            <select asp-for="Thematics" class="input__login" type="text" title="Thematics">
+                {
+                @foreach (var item in (ViewData["Thematics"]) as IEnumerable<Thematic>)
+                {
+                    <option value=@item.Id>@item.Name</option>
+                }
+
+                }
+            </select>
+            <div class="span__input__login"><span asp-validation-for="Thematics"></span></div>
+
+
+            <label asp-for="PublicationTypeName">
+                <div class="input__logo">Тип публикации</div>
+            </label>
+            <select asp-for="PublicationTypeName" class="input__login" type="text" title="PublicationTypeName">
+                {
+                @foreach (var item in (ViewData["PublicationTypeName"]) as IEnumerable<PublicationTypeName>)
+                {
+                    <option value=@item.Id>@item.Name</option>
+                }
+
+                }
+            </select>
+            <div class="span__input__login"><span asp-validation-for="PublicationTypeName"></span></div>
+
+
+
+            <label asp-for="PagesAmount">
+                <div class="input__logo">Кол-во страниц</div>
+            </label>
+            <input asp-for="PagesAmount" class="input__login" type="number" title="PagesAmount">
+            <div class="span__input__login"><span asp-validation-for="PagesAmount"></span></div>
+
+            <label asp-for="PublicationLanguage">
+                <div class="input__logo">Язык публикации</div>
+            </label>
+            <select asp-for="PublicationLanguage" class="input__login" type="range" min="0" max="1" title="PublicationLanguage">
+                {
+                @foreach (Language item in (ViewData["Langs"]) as IEnumerable<Language>)
+                {
+                    <option value=@item.Id>@item.Name</option>
+                }
+
+                }
+            </select>
+            <div class="span__input__login"><span asp-validation-for="PublicationLanguage"></span></div>
+
+            <label asp-for="ResourseLink">
+                <div class="input__logo">Ссылка публикации</div>
+            </label>
+            <input asp-for="ResourseLink" class="input__login" title="ResourseLink">
+            <div class="span__input__login"><span asp-validation-for="ResourseLink"></span></div>
+        </div>
+    </div>
+    <button class="btn__input-cart" type="submit" style="margin-bottom:10px; margin-top:20px; width: 250px; margin-left:650px;">Сохранить</button>
+
+
+</form>
+

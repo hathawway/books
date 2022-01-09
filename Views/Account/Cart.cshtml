@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PublicationShortViewModel>
+@{
+    Layout = "_Layout";
+}
+@{ ViewData["Title"] = "Корзина"; }
+
+
+<form class="containerCart">
+    <div class="logo" style="margin-bottom: 15px">
+        <div class="container__logo">Корзина</div>
+        <!--
+            <button class="action-close" type="button"></button>
+        -->
+    </div>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <div class="content">
+                <div class="content__item" style="width: 10%">
+                    <button class="content__item-icon" type="button"><img src="~/images/book-ico1.ico" alt="Book" style="vertical-align: middle"></button>
+
+                </div>
+                <div class="content__item-infa" style="width: 100%">
+                    <li class="content__text">
+                        @item.Name
+                    </li>
+                    <li class="content__text">@item.Author</li>
+                </div>
+
+                <div class="content__item" style="width: 5%; display: block">
+
+                    @using (Html.BeginForm("Publication", "Publication", new { publicationId = item.Id }, FormMethod.Get))
+                    {
+                        <button class="content__item-icon" type="submit" style="cursor: pointer">
+                            <img src="~/images/enable.png" style="vertical-align: middle">
+
+                        </button>
+                    }
+
+                    @using (Html.BeginForm("AddToAcquired", "Account", new { publicationId = item.Id }, FormMethod.Post))
+                    {
+                        <button class="content__item-icon" type="submit"><img src="~/images/1cart.png" alt="Add" style="vertical-align: middle"></button>
+                    }
+
+                    @using (Html.BeginForm("RemoveFromCart", "Account", new { publicationId = item.Id }, FormMethod.Post))
+                    {
+                        <button class="content__item-icon" type="submit"><img src="~/images/cancel1.png" alt="Delete" style="vertical-align: middle"></button>
+                    }
+
+
+
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div class="text">Пусто</div>
+    }
+</form>

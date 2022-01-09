@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PublicationShortViewModel>
+@{ Layout = "~/Views/Shared/_LayoutAccount.cshtml"; }
+
+
+<!--
+Страница с публикациями которые пользователь приобрёл(купил, перенёс из избранного)
+-->
+
+<div class="account__section">
+    <div class="account__inner">Мои публикации - добавленные</div>
+    <div class="btn__input-cart" type="button" style="margin-bottom:10px; margin-top:0px; width: 250px; margin-left:120px;"><a style="color:#fff; text-decoration:none" asp-controller="Publication" asp-action="Add">Добавить новый ресурс</a></div>
+    <div class="account__container">
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <div class="list__cont">
+                    <div class="list__res">@item.Name</div>
+                    <div class="list__res">@item.Author</div>
+                    <div class="list__res">Добавлено - @item.AddedTime.ToShortDateString()</div>
+                    <div class="list__res">@item.ResourseLink</div>
+
+                    <div class="catalog__content__item" style="margin:0; display:flex; margin-right:10px; background:#ced3ff;">
+
+                        
+
+                        @using (Html.BeginForm("Publication", "Publication", new { publicationId = item.Id }, FormMethod.Get))
+                        {
+                            <button class="catalog__content__item-icon" type="submit" style="cursor: pointer; background: #ced3ff;">
+                                <img src="~/images/enable.png" style="vertical-align: middle">
+
+                            </button>
+                        }
+
+
+
+
+                        @using (Html.BeginForm("RemoveFromCart", "Account", new { publicationId = item.Id }, FormMethod.Post))
+                        {
+                            <button class="catalog__content__item-icon" type="button" style="cursor: pointer; background: #ced3ff; border:none;"><img src="~/images/1cart.png" style="vertical-align: middle"></button>
+                        }
+                    </div>
+                </div>
+
+            }
+        }
+
+
+
+    </div>
+</div>
+
+
+

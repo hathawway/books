@@ -1,0 +1,27 @@
+﻿@model PublicationViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<!--вьюха с подробным просмотром инфы по публикации и добавлением публикации к себе в корзину.
+-->
+
+
+
+    <div class="content" style="margin-top: 10px">
+        <div class="content__item" style="width: 20%; padding: 10px 10px ">
+            <div class="content__item-icon"><img src="~/images/book-ico1.ico" alt="Book" style="vertical-align: middle"></div>
+
+        </div>
+
+        <div class="content__item-infa" style="width: 70%">
+            <li class="content__text">@Model.Name</li>
+            <li class="content__text">@Model.Authors</li>
+            <li class="content__text">@Model.PublishingYear</li>
+            <li class="content__text">@Model.PublicationType</li>
+            <li class="content__text">@Model.Amount c.</li>
+            <li class="content__text">@Model.PublicationLanguage</li>
+            <li class="content__text"><a href="@Model.ResourceLink">Ссылка на источник</a></li>
+        </div>
+        
+        <!--- <li class="content__text">Аннотация Аннотация Аннотация Аннотация Аннотация Аннотация A Аннотация Аннотация АннотацияАннотация Аннотация Аннотация Аннотация Аннотация АннотацияАннотация Аннотация Аннотация АннотацияАннотацияАннотация Аннотация</li>
+        -->
+    </div>

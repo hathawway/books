@@ -1,0 +1,60 @@
+﻿<!-- вьюха для вывода списка публикаций
+    чтобы открыть эту вьюху нужно перейти по ссылке
+    /Catalog?SortField=PublishingYear&Acs=true&query=SomeStrings
+
+    SortField = поле по которому нужно фильтровать  (как раз твои кнопки автор, название, год издания)
+                лучше убрать "не выбрано", если можно сделать так чтобы
+                при повторном нажатии на кнопку отменялась сортировка
+
+                Сортируем по полям Author|Name|PublishingYear
+
+    Acs = по возрастанию / по убыванию (можно сделать отдельную кнопочку типа вверх/вниз)
+                тоже, чтобы при первом нажатии - по возрастанию
+                            при втором         - по убыванию
+                            при третьем        - убирается
+                но если это перебор, то просто две-три кнопки =В
+
+    query = то что пользователь вбивает в поисковую строку
+            тут всё просто, то что пользователь вводит, то и вводишь сюда,
+            но допустим пользователь вводит строку с пробелами, нужно что-то придумать.
+    -->
+
+@model IEnumerable<PublicationShortViewModel>
+@{ Layout = "~/Views/Shared/_LayoutCatalog.cshtml"; }
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <div class="catalog__content">
+            <div class="catalog__content__item" style="width: 15%">
+                <div class="catalog__content__item-icon" style="background: #efefef;">
+                <img src="~/images/book-ico1.ico" alt="Лупа" style="vertical-align: middle"></div>
+
+            </div>
+
+            <div class="catalog__content__item-infa" style="width: 80%">
+                <li class="catalog__content__text">@item.Name</li>
+                <li class="catalog__content__text">@item.Author</li>
+                <li class="catalog__content__text">Добавлено - @item.AddedTime.ToShortDateString()</li>
+                <li class="catalog__content__text">@item.ResourseLink</li>
+            </div>
+
+
+            <div class="catalog__content__item" style="width: 5%; display: block; ">
+                @using (Html.BeginForm("AddToCart", "Account", new { publicationId = item.Id }, FormMethod.Post))
+                {
+                    <button class="catalog__content__item-icon" type="submit" style="cursor: pointer; background: #efefef;"><img src="~/images/1cart.png" style="vertical-align: middle"></button>
+
+                }
+                @using (Html.BeginForm("Publication", "Publication", new { publicationId = item.Id }, FormMethod.Get))
+                {
+                    <button class="catalog__content__item-icon" type="submit" style="cursor: pointer; background: #efefef;">
+                        <img src="~/images/enable.png" style="vertical-align: middle">
+
+                    </button>
+                }
+            </div>
+
+        </div>
+    }
+}

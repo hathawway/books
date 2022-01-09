@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PublicationShortViewModel>
+
+@{ Layout = "~/Views/Shared/_LayoutAccount.cshtml"; }
+
+<!--
+Страница с публикациями, который пользователь загрузил на сайт
+-->
+
+<div class="account__section">
+    <div class="account__inner">Мои публикации - купленные</div>
+    <div class="account__container">
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <div class="list__cont">
+                    <div class="list__res">@item.Name</div>
+                    <div class="list__res">@item.Author</div>
+                    <div class="list__res">Добавлено - @item.AddedTime.ToShortDateString()</div>
+                    <div class="list__res">@item.ResourseLink</div>
+
+                    <div class="catalog__content__item" style="margin:0; display:flex; margin-right:10px; background:#ced3ff;">
+
+                        @using (Html.BeginForm("RemoveFromAcquired", "Account", new { publicationId = item.Id }, FormMethod.Post))
+                        {
+                            <button class="content__item-icon" type="submit" style="cursor: pointer; background: #ced3ff; border:none;"><img src="~/images/1cart.png" alt="Delete" style="vertical-align: middle"></button>
+
+                        }
+                        @using (Html.BeginForm("Publication", "Publication", new { publicationId = item.Id }, FormMethod.Get))
+                        {
+                            <button class="content__item-icon" type="submit" style="cursor: pointer; background: #ced3ff;">
+                                <img src="~/images/enable.png" style="vertical-align: middle">
+
+                            </button>
+                        }
+
+
+                    </div>
+                </div>
+
+            }
+        }
+
+
+
+    </div>
+</div>
+
+
+
